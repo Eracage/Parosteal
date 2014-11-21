@@ -1,6 +1,7 @@
 #include <GameScene.hpp>
 #include <Scenes.hpp>
 #include <uth/Platform/JavaFunctions.hpp>
+#include <Player.h>
 
 using namespace uth;
 
@@ -38,8 +39,9 @@ bool GameScene::Init()
 {
 	createLayers();
 
-	AddChild(a = new GameObject());
-	a->AddComponent(new Sprite("test.tga"));
+	AddChild<Player>();
+
+	//a->AddComponent(new Sprite("test.tga"));
 
 
 
@@ -54,7 +56,7 @@ void GameScene::Update(float dt)
 {
 	Scene::Update(dt);
 
-	a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
+	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }
 
 //void TestScene::Draw(RenderTarget& target, RenderAttributes attributes)

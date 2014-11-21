@@ -1,5 +1,6 @@
 #include <MenuScene.hpp>
 #include <Scenes.hpp>
+#include <Button.h>
 
 using namespace uth;
 
@@ -37,10 +38,22 @@ bool MenuScene::Init()
 {
 	createLayers();
 
-	AddChild(a = new GameObject());
-	a->AddComponent(new Sprite("test.tga"));
+	//AddChild(a = new GameObject());
+	//a->AddComponent(new Sprite("test.tga"));
 
+	pmath::Vec2 position, size;
+	position.x = 0;
+	position.y = -256;
 
+	size.w = 256;
+	size.h = 48;
+
+	position.y += 80;
+	AddChild(a = new Button(position, size, "Start game", [](){uthSceneM.GoToScene(GAME); }));
+	position.y += 80;
+	AddChild(a = new Button(position, size, "Credits", [](){uthSceneM.GoToScene(CREDITS); }));
+	position.y += 80;
+	AddChild(a = new Button(position, size, "Quit", [](){ /* TODO: quit*/ }));
 
 	return true;
 }
@@ -53,7 +66,7 @@ void MenuScene::Update(float dt)
 {
 	Scene::Update(dt);
 
-	a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
+	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }
 
 //void TestScene::Draw(RenderTarget& target, RenderAttributes attributes)

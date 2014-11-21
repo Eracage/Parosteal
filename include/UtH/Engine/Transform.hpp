@@ -81,6 +81,9 @@ namespace uth
 
 		Object* parent;
 
+		void setSize(const pmath::Vec2& size);
+		void setSize(const float width, const float height);
+
 	private:
 		// friends so they can alter transform size
 		friend class AnimatedSprite;
@@ -89,9 +92,6 @@ namespace uth
 		friend class Text;
 		friend class ParticleSystem;
 		friend class TMX::Tile;
-
-		void setSize(const pmath::Vec2& size);
-		void setSize(const float width, const float height);
 
 		pmath::Vec2 m_position;
 		pmath::Vec2 m_size;

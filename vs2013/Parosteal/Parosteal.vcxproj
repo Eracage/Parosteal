@@ -95,12 +95,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="source\CreditsScene.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\GameScene.cpp" />
     <ClCompile Include="source\MenuScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="include\CreditsScene.hpp" />
     <ClInclude Include="include\MenuScene.hpp" />
     <ClInclude Include="include\Scenes.hpp" />

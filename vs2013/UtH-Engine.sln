@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AndroidTest", "AndroidTest\AndroidTest.vcxproj", "{4C267BE7-7BF8-4967-A71F-ABA1199D48BA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Parosteal", "Parosteal\Parosteal.vcxproj", "{8DE8265E-23CF-47AA-9EA3-233C079CD3EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -43,6 +45,10 @@ Global
 		{07326890-84B7-46AD-9CA3-2ACBD1EE3B26}.Release|Win32.Build.0 = Release|Win32
 		{4C267BE7-7BF8-4967-A71F-ABA1199D48BA}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4C267BE7-7BF8-4967-A71F-ABA1199D48BA}.Release|Win32.ActiveCfg = Release|Win32
+		{8DE8265E-23CF-47AA-9EA3-233C079CD3EC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8DE8265E-23CF-47AA-9EA3-233C079CD3EC}.Debug|Win32.Build.0 = Debug|Win32
+		{8DE8265E-23CF-47AA-9EA3-233C079CD3EC}.Release|Win32.ActiveCfg = Release|Win32
+		{8DE8265E-23CF-47AA-9EA3-233C079CD3EC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

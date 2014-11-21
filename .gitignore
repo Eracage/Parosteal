@@ -160,6 +160,8 @@ android/libs/
 #Assets
 android/assets/
 vs*/TestProject/assets/
+vs*/Parosteal/assets/
+vs*/Parosteal/assets.uth
 
 # Eclipse crap
 .classpath

@@ -5,12 +5,17 @@
 
 int main()
 {
+	srand(time(0));
+
 	uthSceneM.registerNewSceneFunc(NewSceneFunc,COUNT);
 
 	uthEngine.Init();
 
 	while(uthEngine.Running())
 	{
+		if (uthInput.Keyboard.IsKeyPressed(uth::Keyboard::Escape))
+			uthEngine.Exit();
+
 		uthEngine.Update();
 
 		uthEngine.Draw();

@@ -68,17 +68,13 @@ void GameScene::Update(float dt)
 
 	static float scale = 1;
 
-	if (uthInput.Keyboard.IsKeyDown(Keyboard::LocalMinus)){
-		scale -= 0.1;
-	}
-
 
 	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadAdd))
 		scale *= 1 + dt;
 	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadSubtract))
 		scale *= 1 - dt;
 
-	layers[LMap]->transform.SetScale(scale);
+	transform.SetScale(scale);
 
 	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }

@@ -63,7 +63,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>RunCopyAssets.bat</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,7 +85,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>RunCopyAssets.bat</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -95,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="source\Background.cpp" />
     <ClCompile Include="source\Button.cpp" />
+    <ClCompile Include="source\Cloud.cpp" />
     <ClCompile Include="source\CloudController.cpp" />
     <ClCompile Include="source\CreditsScene.cpp" />
     <ClCompile Include="source\main.cpp" />
@@ -106,6 +109,7 @@
   <ItemGroup>
     <ClInclude Include="include\Background.h" />
     <ClInclude Include="include\Button.h" />
+    <ClInclude Include="include\Cloud.h" />
     <ClInclude Include="include\CloudController.hpp" />
     <ClInclude Include="include\CreditsScene.hpp" />
     <ClInclude Include="include\MenuScene.hpp" />

@@ -1,5 +1,6 @@
 #include <CloudController.hpp>
 #include <Globals.h>
+#include <Cloud.h>
 
 using namespace uth;
 
@@ -8,7 +9,6 @@ CloudController::CloudController(pmath::Vec2& positionVec)
 {
 	size = uthEngine.GetWindow().GetCamera().GetSize().x;
 	
-	Texture* strawberryCloudTexture = uthRS.LoadTexture("cloud.png");
 	for (int i = 0; i < Globals::CLOUD_COUNT; i++)
 	{
 		auto *o = new GameObject();
@@ -17,7 +17,9 @@ CloudController::CloudController(pmath::Vec2& positionVec)
 		float x = 2000 * pmath::cos(angle);
 		float y = 2000 * pmath::sin(angle);
 		o->transform.SetPosition(position.x + x, position.y + y);
-		o->AddComponent(new Sprite(strawberryCloudTexture));
+		o->transform.SetRotation(rand() % 360);
+		o->AddComponent(new Cloud());
+		
 	}
 }
 

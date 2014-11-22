@@ -1,7 +1,7 @@
 #include <Globals.h>
 
 float Globals::SCORE = 0;
-int Globals::CLOUD_COUNT = 16;
+int Globals::CLOUD_COUNT = 36;
 
 //Player control
 

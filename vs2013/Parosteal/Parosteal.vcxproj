@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="source\Background.cpp" />
     <ClCompile Include="source\Button.cpp" />
+    <ClCompile Include="source\CloudController.cpp" />
     <ClCompile Include="source\CreditsScene.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\GameScene.cpp" />
@@ -107,6 +108,7 @@
   <ItemGroup>
     <ClInclude Include="include\Background.h" />
     <ClInclude Include="include\Button.h" />
+    <ClInclude Include="include\CloudController.hpp" />
     <ClInclude Include="include\CreditsScene.hpp" />
     <ClInclude Include="include\MenuScene.hpp" />
     <ClInclude Include="include\Player.h" />

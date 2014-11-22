@@ -27,7 +27,6 @@ Background::Background(pmath::Vec2& positionVec)
 		auto o = static_cast<GameObject*>(obj.get());
 		o->AddComponent(new Sprite(textures[rand() % textures.size()]));
 	}
-
 }
 
 void Background::update(float)

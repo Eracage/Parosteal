@@ -72,7 +72,7 @@ void Player::update(float dt)
 
 	setDifficulty();
 
-	Globals::DIFFICULTY += 0.1f * dt;
+	//Globals::DIFFICULTY += 0.1f * dt;
 
 	Transform& tipT = m_tip->transform;
 
@@ -139,9 +139,9 @@ void Player::update(float dt)
 	MapPos = PlayerPos - m_tip->transform.GetPosition();
 	m_map->transform.SetOrigin(MapPos);
 
-	float rotation = dt * (tipPos.length() + 100);
-	m_map->transform.Rotate(rotation);
-	tipT.SetPosition(pmath::Mat2::createRotation(-rotation) * tipT.GetPosition());
+	//float rotation = dt * (tipPos.length() + 100);
+	//m_map->transform.Rotate(rotation);
+	//tipT.SetPosition(pmath::Mat2::createRotation(-rotation) * tipT.GetPosition());
 }
 
 void Player::setDifficulty()

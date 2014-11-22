@@ -18,6 +18,8 @@ public:
 	//void Draw(RenderTarget& target, RenderAttributes attributes = RenderAttributes()) override;
 	uth::GameObject* a;
 	std::vector<uth::Layer*> layers;
+
+	pmath::Vec2 position;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #include <Scenes.hpp>
 #include <uth/Platform/JavaFunctions.hpp>
 #include <Player.h>
+#include <Background.h>
 
 using namespace uth;
 
@@ -10,15 +11,16 @@ namespace
 {
     enum Layers
     {
-        Default,
-        Other,
-		Count
+        LMap,
+		LPlayer,
+		LUi,
+		LCount
     };
 }
 
 void GameScene::createLayers()
 {
-	for (int i = 0; i < Count; ++i)
+	for (int i = 0; i < LCount; ++i)
 		layers.push_back(AddChild<GameObject>().get());
 
 	//AddChild<GameObject>();
@@ -39,10 +41,13 @@ bool GameScene::Init()
 {
 	createLayers();
 
-	AddChild<Player>();
+	layers[LMap]->AddChild(new Background(position));
+
+	layers[LPlayer]->AddChild<Player>();
 
 	//a->AddComponent(new Sprite("test.tga"));
 
+	
 
 
 	return true;
@@ -55,6 +60,13 @@ bool GameScene::DeInit()
 void GameScene::Update(float dt)
 {
 	Scene::Update(dt);
+
+	layers[LMap]->transform.SetOrigin(position); 
+	static float scale = 1;
+	scale *= 1 - dt/8;
+	layers[LMap]->transform.SetScale(scale);
+
+	position += uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position());
 
 	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }

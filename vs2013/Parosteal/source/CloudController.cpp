@@ -38,7 +38,9 @@ void CloudController::update(float)
 			float angle = rand() % 360;
 			float x = 2000 * pmath::cos(angle);
 			float y = 2000 * pmath::sin(angle);
+			o->transform.SetRotation(rand() % 360);
 			o->transform.SetPosition(position.x + x, position.y + y);
+			o->GetComponent<Cloud>()->respawn();
 		}
 	}
 }

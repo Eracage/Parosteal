@@ -62,10 +62,21 @@ bool GameScene::DeInit()
 
 void GameScene::Update(float dt)
 {
+	if (dt > 0.1)
+		dt = 0.1;
 	Scene::Update(dt);
 
 	layers[LMap]->transform.SetOrigin(position); 
-	position += uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position())/100;
+	static float scale = 1;
+
+	position += uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position());
+
+	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadAdd))
+		scale *= 1 + dt;
+	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadSubtract))
+		scale *= 1 - dt;
+
+	transform.SetScale(scale);
 
 	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }

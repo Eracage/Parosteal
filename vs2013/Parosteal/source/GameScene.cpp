@@ -43,7 +43,7 @@ bool GameScene::Init()
 
 	layers[LMap]->AddChild(new Background(position));
 
-	layers[LPlayer]->AddChild<Player>();
+	layers[LPlayer]->AddChild(new Player(layers[LMap],position));
 
 	//a->AddComponent(new Sprite("test.tga"));
 
@@ -63,10 +63,8 @@ void GameScene::Update(float dt)
 		dt = 0.1;
 	Scene::Update(dt);
 
-	layers[LMap]->transform.SetOrigin(position); 
 	static float scale = 1;
 
-	position += uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position());
 	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadAdd))
 		scale *= 1 + dt;
 	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadSubtract))

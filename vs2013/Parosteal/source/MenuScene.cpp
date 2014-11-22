@@ -45,15 +45,15 @@ bool MenuScene::Init()
 	position.x = 0;
 	position.y = -256;
 
-	size.w = 256;
-	size.h = 48;
+	size.w = 512;
+	size.h = 64;
 
 	position.y += 80;
 	AddChild(a = new Button(position, size, "Start game", [](){uthSceneM.GoToScene(GAME); }));
 	position.y += 80;
 	AddChild(a = new Button(position, size, "Credits", [](){uthSceneM.GoToScene(CREDITS); }));
 	position.y += 80;
-	AddChild(a = new Button(position, size, "Quit", [](){ /* TODO: quit*/ }));
+	AddChild(a = new Button(position, size, "Quit", [](){ uthEngine.Exit(); }));
 
 	return true;
 }

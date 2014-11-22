@@ -32,8 +32,6 @@ Background::Background(pmath::Vec2& positionVec)
 
 void Background::update(float)
 {
-	position += pmath::Vec2(0.2);
-
 	for (auto& obj : Children())
 	{
 		auto o = static_cast<GameObject*>(obj.get());

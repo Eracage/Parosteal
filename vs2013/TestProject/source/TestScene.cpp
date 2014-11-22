@@ -33,7 +33,7 @@ bool TestScene::Init()
         ParticleTemplate pt;
         pt.SetLifetime(-1.f);
         pt.SetSpeed(10.f, 150.f);
-        pt.SetTexture(uthRS.LoadTexture("particle.tga"));
+        pt.SetTexture(uthRS.LoadTexture("particle.png"));
 
         auto ps = AddChild(new ParticleSystem(100));
         ps->SetTemplate(pt);
@@ -44,6 +44,7 @@ bool TestScene::Init()
             pmath::Vec2 tvec(Randomizer::InsideCircle());
             tvec /= static_cast<float>(tvec.length());
             particle.direction = Randomizer::GetFloat(pTemplate.minSpeed, pTemplate.maxSpeed) * tvec;
+			particle.SetPosition(rand() % 400 - 200, rand() % 400 - 200);
         });
 
         aff->SetParticleUpdateFunc([](Particle& part, const ParticleTemplate& ptemp, float dt)

@@ -4,6 +4,7 @@
 #include <Player.h>
 #include <Background.h>
 #include <CloudController.hpp>
+#include <Globals.h>
 
 
 using namespace uth;
@@ -44,14 +45,34 @@ bool GameScene::Init()
 	createLayers();
 
 	layers[LMap]->AddChild(new Background());
-	layers[LMap]->AddChild(new CloudController());
 
 	layers[LPlayer]->AddChild(new Player(layers[LMap]));
 
-	//a->AddComponent(new Sprite("test.tga"));
+	ParticleTemplate pt;
+	pt.SetLifetime(-1.f);
+	pt.SetSpeed(0);
+	pt.SetTexture(uthRS.LoadTexture("particle.png"));
 
-	
+	auto ps = layers[LMap]->AddChild(new ParticleSystem(3000));
+	ps->SetTemplate(pt);
 
+	Affector* aff = new Affector();
+	aff->SetParticleInitFunc([](Particle& particle, const ParticleTemplate& pTemplate)
+	{
+		float angle = rand() % 360;
+		particle.direction = pmath::Vec2(pmath::cos(angle), pmath::sin(angle));
+		particle.SetGlobalPosition(Globals::PLAYER_TIP);
+	});
+
+	aff->SetParticleUpdateFunc([](Particle& part, const ParticleTemplate& ptemp, float dt)
+	{
+		//part.color = pmath::Vec4(0, 0, 0, 1);
+	});
+
+	ps->AddAffector(aff);
+	ps->SetEmitProperties(true, 0.1f, 0.1f, 1, 1);
+
+	layers[LMap]->AddChild(new CloudController());
 
 	return true;
 }

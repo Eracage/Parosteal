@@ -3,6 +3,8 @@
 #include <uth/Platform/JavaFunctions.hpp>
 #include <Player.h>
 #include <Background.h>
+#include <CloudController.hpp>
+
 
 using namespace uth;
 
@@ -42,6 +44,7 @@ bool GameScene::Init()
 	createLayers();
 
 	layers[LMap]->AddChild(new Background(position));
+	layers[LMap]->AddChild(new CloudController(position));
 
 	layers[LPlayer]->AddChild<Player>();
 
@@ -65,8 +68,14 @@ void GameScene::Update(float dt)
 
 	layers[LMap]->transform.SetOrigin(position); 
 	static float scale = 1;
+		scale += 0.1;
+	}
+	if (uthInput.Keyboard.IsKeyDown(Keyboard::LocalMinus)){
+		scale -= 0.1;
+	}
 
 	position += uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position());
+
 	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadAdd))
 		scale *= 1 + dt;
 	if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadSubtract))

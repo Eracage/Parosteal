@@ -3,8 +3,7 @@
 
 using namespace uth;
 
-CloudController::CloudController(pmath::Vec2& positionVec)
-	:position(positionVec)
+CloudController::CloudController()
 {
 	size = uthEngine.GetWindow().GetCamera().GetSize().x;
 	
@@ -16,7 +15,7 @@ CloudController::CloudController(pmath::Vec2& positionVec)
 		float angle = rand() % 360;
 		float x = 2000 * pmath::cos(angle);
 		float y = 2000 * pmath::sin(angle);
-		o->transform.SetPosition(position.x + x, position.y + y);
+		o->transform.SetPosition(Globals::PLAYER_POS.x + x, Globals::PLAYER_POS.y + y);
 		o->AddComponent(new Sprite(strawberryCloudTexture));
 	}
 }
@@ -29,14 +28,14 @@ void CloudController::update(float)
 		auto o = static_cast<GameObject*>(obj.get());
 		pmath::Vec2 posVector = o->transform.GetPosition();
 
-		double distance = posVector.distance(posVector, position);
+		double distance = posVector.distance(posVector, Globals::PLAYER_POS);
 
 		if (distance > 2048)
 		{
 			float angle = rand() % 360;
 			float x = 2000 * pmath::cos(angle);
 			float y = 2000 * pmath::sin(angle);
-			o->transform.SetPosition(position.x + x, position.y + y);
+			o->transform.SetPosition(Globals::PLAYER_POS.x + x, Globals::PLAYER_POS.y + y);
 		}
 	}
 }

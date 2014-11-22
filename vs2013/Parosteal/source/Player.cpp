@@ -48,9 +48,8 @@ pmath::Vec2 control()
 	return retVal;
 }
 
-Player::Player(Object* map, pmath::Vec2& position)
+Player::Player(Object* map)
 	: GameObject("Player"),
-	MapPos(position),
 	m_map(map)
 {
 	AddChild(m_top = new GameObject());
@@ -97,9 +96,14 @@ void Player::update(float dt)
 	if (uthInput.Keyboard.IsKeyDown(Keyboard::Key0))
 	{
 		Globals::DIFFICULTY = 0;
-		tipT.SetPosition(pmath::Vec2());
+
+		setDifficulty();
+
 		PlayerPos = pmath::Vec2();
-		MapPos = pmath::Vec2();
+		tipT.SetPosition(pmath::Vec2());
+		m_top->transform.SetPosition(pmath::Vec2());
+
+		Globals::PLAYER_POS = pmath::Vec2();
 	}
 
 	const pmath::Vec2 tipPos = tipT.GetPosition();
@@ -121,12 +125,10 @@ void Player::update(float dt)
 
 
 	// Keep spinning
-	const float SpinAmount = pow(tipT.GetPosition().lengthSquared(), m_spinPow)
+	const float SpinAmount = (1 + pow(tipT.GetPosition().lengthSquared(), m_spinPow))
 		* dt * m_spinMultiplier;
 
 	tipT.SetPosition(pmath::Mat2::createRotation(SpinAmount) * tipT.GetPosition());
-
-
 
 	// Keep tip in rational range
 	if (tipT.GetPosition().lengthSquared() > 12000)
@@ -136,12 +138,16 @@ void Player::update(float dt)
 	m_baseTargetPos = -tipT.GetPosition();
 	m_top->transform.Move((m_baseTargetPos - m_top->transform.GetPosition()) * dt * 3);
 
-	MapPos = PlayerPos - m_tip->transform.GetPosition();
-	m_map->transform.SetOrigin(MapPos);
 
 	//float rotation = dt * (tipPos.length() + 100);
 	//m_map->transform.Rotate(rotation);
 	//tipT.SetPosition(pmath::Mat2::createRotation(-rotation) * tipT.GetPosition());
+
+
+	Globals::PLAYER_POS = PlayerPos - m_tip->transform.GetPosition();
+	Globals::PLAYER_TIP = tipT.GetPosition();
+
+	m_map->transform.SetOrigin(Globals::PLAYER_POS);
 }
 
 void Player::setDifficulty()

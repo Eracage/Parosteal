@@ -1,9 +1,9 @@
 #include "Background.h"
+#include <Globals.h>
 
 using namespace uth;
 
-Background::Background(pmath::Vec2& positionVec)
-	: position(positionVec)
+Background::Background()
 {
 	textures.push_back(uthRS.LoadTexture("Background1.png"));
 	textures.push_back(uthRS.LoadTexture("Background2.png"));
@@ -36,13 +36,13 @@ void Background::update(float)
 		auto o = static_cast<GameObject*>(obj.get());
 
 		int x = 0, y = 0;
-		if (o->transform.GetPosition().x - position.x > size)
+		if (o->transform.GetPosition().x - Globals::PLAYER_POS.x > size)
 			x--;
-		else if (o->transform.GetPosition().x - position.x < -size)
+		else if (o->transform.GetPosition().x - Globals::PLAYER_POS.x < -size)
 			x++;
-		if (o->transform.GetPosition().y - position.y > size)
+		if (o->transform.GetPosition().y - Globals::PLAYER_POS.y > size)
 			y--;
-		else if (o->transform.GetPosition().y - position.y < -size)
+		else if (o->transform.GetPosition().y - Globals::PLAYER_POS.y < -size)
 			y++;
 
 		if (x != 0 || y != 0)

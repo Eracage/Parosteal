@@ -5,10 +5,9 @@ class Background :
 {
 private:
 	std::vector<uth::Texture*> textures;
-	pmath::Vec2& position;
 	float size;
 public:
-	Background(pmath::Vec2& positionVec);
+	Background();
 	~Background();
 	void update(float)override;
 };

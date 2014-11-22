@@ -43,10 +43,10 @@ bool GameScene::Init()
 {
 	createLayers();
 
-	layers[LMap]->AddChild(new Background(position));
-	layers[LMap]->AddChild(new CloudController(position));
+	layers[LMap]->AddChild(new Background());
+	layers[LMap]->AddChild(new CloudController());
 
-	layers[LPlayer]->AddChild(new Player(layers[LMap],position));
+	layers[LPlayer]->AddChild(new Player(layers[LMap]));
 
 	//a->AddComponent(new Sprite("test.tga"));
 

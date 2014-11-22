@@ -4,22 +4,18 @@
 class Player : public uth::GameObject
 {
 public:
-	Player(Object* map, pmath::Vec2& position);
+	Player(Object* map);
 	void update(float dt) override;
 
 	void setDifficulty();
-
 	pmath::Vec2 PlayerPos;
-	pmath::Vec2& MapPos;
 private:
 	GameObject* m_top;
 	GameObject* m_tip;
 
 	Object* m_map;
 
-
 	pmath::Vec2 m_baseTargetPos;
-
 
 	// Difficulty controls
 

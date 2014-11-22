@@ -5,10 +5,9 @@ class CloudController :
 {
 private:
 	std::vector<GameObject*> clouds;
-	pmath::Vec2& position;
 	float size;
 public:
-	CloudController(pmath::Vec2& positionVec);
+	CloudController();
 	~CloudController();
 	void update(float)override;
 };

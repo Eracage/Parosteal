@@ -60,6 +60,10 @@ Player::Player(Object* map)
 	m_top->AddTags({ "Player", "Base" });
 	m_top->AddComponent(new Sprite("TopTop.png"));
 
+	AddChild(m_topDude = new GameObject());
+	m_topDude->AddTags({ "Player", "Dude" });
+	m_topDude->AddComponent(new Sprite("TopDude.png"));
+
 	AddChild(m_tip = new GameObject());
 	m_tip->AddTags({ "Player", "Tip" });
 	m_tip->AddComponent(new Sprite("PlayerTip.png"));
@@ -133,6 +137,7 @@ void Player::update(float dt)
 	tipT.SetPosition(pmath::Mat2::createRotation(SpinAmount) * tipT.GetPosition());
 
 	m_top->transform.Rotate(SpinAmount);
+	m_topDude->transform.Rotate(SpinAmount);
 
 	// Keep tip in rational range
 	if (tipT.GetPosition().lengthSquared() > 12000)
@@ -141,7 +146,9 @@ void Player::update(float dt)
 	// Keep top in opposite direction of tip
 	m_baseTargetPos = -tipT.GetPosition();
 	m_top->transform.Move((m_baseTargetPos - m_top->transform.GetPosition()) * dt * 3);
+
 	m_topShadow->transform.SetPosition(m_top->transform.GetPosition() * 0.90);
+	m_topDude->transform.SetPosition(m_top->transform.GetPosition() * 1.05);
 
 
 	//float rotation = dt * (tipPos.length() + 100);

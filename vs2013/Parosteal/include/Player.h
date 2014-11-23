@@ -17,6 +17,7 @@ public:
 private:
 	GameObject* m_top;
 	GameObject* m_topShadow;
+	GameObject* m_topDude;
 	GameObject* m_tip;
 
 	Object* m_map;

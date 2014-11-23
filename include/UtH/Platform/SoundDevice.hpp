@@ -15,6 +15,7 @@ namespace uth
 	public:
 		SoundDevice();
 		~SoundDevice();
+		static bool DeviceFailed;
 
 	private:
 		SoundDevice(const SoundDevice&);

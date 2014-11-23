@@ -20,6 +20,8 @@ Sound::Sound()
 
 Sound::~Sound()
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	alDeleteSources(1, &source);
 	alDeleteBuffers(1, &buffer);
 
@@ -32,11 +34,15 @@ Sound::~Sound()
 // PUBLIC
 void Sound::Play()
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	alSourcePlay(source);
 }
 
 void Sound::Play(float offset)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	if(offset >= duration)
 		WriteError("Offset %f exceeds %f duration!", offset, duration);
 	else
@@ -48,6 +54,8 @@ void Sound::Play(float offset)
 
 void Sound::PlayEffect()
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	if(Status() != AL_PLAYING)
 		alSourcePlay(source);
 	else
@@ -56,11 +64,15 @@ void Sound::PlayEffect()
 
 void Sound::Stop()
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	alSourceStop(source);
 }
 
 void Sound::Pause()
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	if(Status() == AL_PLAYING)
 		alSourcePause(source);
 	//else
@@ -69,6 +81,8 @@ void Sound::Pause()
 
 void Sound::Loop()
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	if(loop)
 	{
 		alSourcei(source, AL_LOOPING, AL_FALSE);
@@ -83,6 +97,8 @@ void Sound::Loop()
 
 void Sound::Loop(bool looping)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	if(looping == 0)
 		loop = false;
 	else
@@ -94,6 +110,8 @@ void Sound::Loop(bool looping)
 
 void Sound::SetVolume(int volumePercent)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	float newVolume = float(volumePercent) / 100.0f;
 	alSourcef(source, AL_GAIN, newVolume);
 	CheckALError("al_sourcef AL_GAIN");
@@ -101,6 +119,8 @@ void Sound::SetVolume(int volumePercent)
 
 void Sound::SetPitch(int pitchPercent)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	float newPitch = float(pitchPercent) / 100.0f;
 	alSourcef(source, AL_PITCH, newPitch);
 	CheckALError("al_sourcef AL_PITCH");
@@ -108,6 +128,8 @@ void Sound::SetPitch(int pitchPercent)
 
 void Sound::SetSourcePosition(float x, float y, float z)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	_posX = x; _posY = y; _posZ = z;
 	alSource3f(source, AL_POSITION, _posX, _posY, _posZ);
 	CheckALError("al_source3f AL_POSITION");
@@ -116,6 +138,8 @@ void Sound::SetSourcePosition(float x, float y, float z)
 }
 void Sound::SetSourcePosition(pmath::Vec3 position)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	_posX = position.x; _posY = position.y; _posZ = position.z;
 	alSource3f(source, AL_POSITION, _posX, _posY, _posZ);
 	CheckALError("al_source3f AL_POSITION");
@@ -125,6 +149,8 @@ void Sound::SetSourcePosition(pmath::Vec3 position)
 
 void Sound::SetListenerPosition(float x, float y, float z)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	_posX = x; _posY = y; _posZ = z;
 	alListener3f(AL_POSITION, _posX, _posY, _posZ);
 	CheckALError("al_slistener3f AL_POSITION");
@@ -133,6 +159,8 @@ void Sound::SetListenerPosition(float x, float y, float z)
 }
 void Sound::SetListenerPosition(pmath::Vec3 position)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	_posX = position.x; _posY = position.y; _posZ = position.z;
 	alListener3f(AL_POSITION, _posX, _posY, _posZ);
 	CheckALError("al_slistener3f AL_POSITION");
@@ -142,6 +170,8 @@ void Sound::SetListenerPosition(pmath::Vec3 position)
 
 bool Sound::IsPlaying()
 {
+	if (SoundDevice::DeviceFailed)
+		return false;
 	if (Status() == AL_PLAYING)
 		return true;
 	else
@@ -162,6 +192,9 @@ bool Sound::Load(std::string fileName)
 void Sound::Initialize(std::string fileName)
 {
 	uth::SoundDevice::getInstance();
+
+	if (SoundDevice::DeviceFailed)
+		return;
 
 	SF_INFO soundInfo;
 
@@ -227,6 +260,8 @@ void Sound::Initialize(std::string fileName)
 
 void Sound::CreateSources(ALuint &source)
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	// create source
 	alGenSources(1, &source);
 	CheckALError("alGen_sources");
@@ -249,6 +284,8 @@ void Sound::CreateSources(ALuint &source)
 // Returns in what state source is currently.
 ALint Sound::Status()
 {
+	if (SoundDevice::DeviceFailed)
+		return 0;
 	ALint _state;
 	alGetSourcei(source, AL_SOURCE_STATE, &_state);
 	return _state;
@@ -257,6 +294,8 @@ ALint Sound::Status()
 // Removes already finished playback from beginning of vector.
 void Sound::Copy()
 {
+	if (SoundDevice::DeviceFailed)
+		return;
 	ALuint source;
 	Sound::CreateSources(source);
 	// We want to put copied sound in same location as copied source.

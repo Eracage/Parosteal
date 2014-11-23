@@ -8,6 +8,8 @@ using namespace uth;
 //ALCdevice* SoundDevice::device = 0;
 //ALCcontext* SoundDevice::context = 0;
 
+bool SoundDevice::DeviceFailed = false;
+
 SoundDevice::SoundDevice()
 	: device(0),
 	context(0),
@@ -18,9 +20,12 @@ SoundDevice::SoundDevice()
 
 SoundDevice::~SoundDevice()
 {
-	alcMakeContextCurrent(0);
-	alcDestroyContext(context);
-	alcCloseDevice(device);
+	if (!DeviceFailed)
+	{
+		alcMakeContextCurrent(0);
+		alcDestroyContext(context);
+		alcCloseDevice(device);
+	}
 }
 
 // PRIVATE
@@ -36,16 +41,20 @@ void SoundDevice::CreateContext()
 		if (!device)
 		{
 			WriteError("Failed to open audio device!");
-			assert(false);
+			DeviceFailed = true;
+			//assert(false);
 		}
 		else
 			WriteLog("Audio device opened.\n");
 
-		context = alcCreateContext(device, 0);
-		if(!alcMakeContextCurrent(context))
+		if (!DeviceFailed)
 		{
-			WriteError("Failed to make context current!");
-			CheckALError("alcMakeContextCurrent");
+			context = alcCreateContext(device, 0);
+			if (!alcMakeContextCurrent(context))
+			{
+				WriteError("Failed to make context current!");
+				CheckALError("alcMakeContextCurrent");
+			}
 		}
 	}
 }

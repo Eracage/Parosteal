@@ -20,6 +20,8 @@ public:
 	std::vector<uth::Layer*> layers;
 
 	pmath::Vec2 position;
+
+	uth::ParticleSystem* particleSystem;
 };
 
 #endif

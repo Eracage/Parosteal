@@ -2,6 +2,7 @@
 
 float Globals::SCORE = 0;
 int Globals::CLOUD_COUNT = 36;
+pmath::Vec2 Globals::LAST_PARTICLE = pmath::Vec2(0, 0);
 
 //Player control
 pmath::Vec2 Globals::PLAYER_POS;

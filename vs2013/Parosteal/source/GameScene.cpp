@@ -43,6 +43,8 @@ void GameScene::createLayers()
 
 bool GameScene::Init()
 {
+	uthEngine.GetWindow().GetCamera().SetSize(1280, 720);
+
 	createLayers();
 
 	layers[LMap]->AddChild(new Background());

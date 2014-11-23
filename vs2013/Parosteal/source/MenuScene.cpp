@@ -5,6 +5,7 @@
 using namespace uth;
 
 uth::Sound* MenuScene::audio = nullptr;
+float MenuScene::volume = 0;
 
 namespace
 {
@@ -37,6 +38,8 @@ void MenuScene::createLayers()
 
 bool MenuScene::Init()
 {
+	uthEngine.GetWindow().GetCamera().SetSize(1280, 720);
+
 	if (audio == nullptr)
 		audio = uthRS.LoadSound("Music.wav");
 	audio->Loop(true);
@@ -46,8 +49,6 @@ bool MenuScene::Init()
 		audio->SetVolume(volume);
 		audio->Play();
 	}
-	else
-		volume = 100;
 
 	createLayers();
 

@@ -7,7 +7,6 @@
 class MenuScene : public uth::Scene
 {
 	void createLayers();
-	float volume;
 public:
 	MenuScene(){}
 	~MenuScene() override{}
@@ -21,6 +20,7 @@ public:
 	std::vector<uth::Layer*> layers;
 
 	static uth::Sound* audio;
+	static float volume;
 };
 
 #endif

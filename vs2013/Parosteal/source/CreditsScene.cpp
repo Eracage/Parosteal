@@ -1,5 +1,7 @@
 #include <CreditsScene.hpp>
 #include <Scenes.hpp>
+#include <Button.h>
+#include <MenuScene.hpp>
 
 using namespace uth;
 
@@ -35,10 +37,12 @@ void CreditsScene::createLayers()
 
 bool CreditsScene::Init()
 {
+	uthEngine.GetWindow().GetCamera().SetSize(1280, 720);
+
 	createLayers();
 
-	AddChild(a = new GameObject());
-	a->AddComponent(new Sprite("test.tga"));
+	AddChild(a = new Button({ 540, 300 }, { 128, 64 }, "Back", [](){uthSceneM.GoToScene(MENU); }));
+
 
 
 
@@ -51,9 +55,16 @@ bool CreditsScene::DeInit()
 
 void CreditsScene::Update(float dt)
 {
-	Scene::Update(dt);
+	if (MenuScene::volume < 100)
+	{
+		MenuScene::volume += 20 * dt;
+		MenuScene::audio->SetVolume(MenuScene::volume);
 
-	a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
+	}
+	else
+		MenuScene::audio->SetVolume(100);
+
+	Scene::Update(dt);
 }
 
 //void CreditsScene::Draw(RenderTarget& target, RenderAttributes attributes)

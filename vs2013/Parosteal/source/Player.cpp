@@ -149,8 +149,8 @@ void Player::update(float dt)
 	//tipT.SetPosition(pmath::Mat2::createRotation(-rotation) * tipT.GetPosition());
 
 
-	Globals::PLAYER_POS = PlayerPos;
-	Globals::PLAYER_TIP = PlayerPos + tipT.GetPosition();
+	Globals::PLAYER_POS = pmath::Vec2i(PlayerPos);
+	Globals::PLAYER_TIP = pmath::Vec2i(PlayerPos + tipT.GetPosition());
 
 	m_map->transform.SetOrigin(Globals::PLAYER_POS);
 }

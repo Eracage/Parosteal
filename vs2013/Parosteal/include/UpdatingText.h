@@ -19,7 +19,9 @@ public:
 		textBefore(textBefore),
 		textAfter(textAfter)
 	{
-		Update(0);
+		std::ostringstream os;
+		os << textBefore << obj << textAfter;
+		SetText(os.str());
 	}
 
 	void Update(float) override
@@ -27,6 +29,7 @@ public:
 		std::ostringstream os;
 		os << textBefore << obj << textAfter;
 		SetText(os.str());
+		parent->transform.SetOrigin(7);
 	}
 };
 

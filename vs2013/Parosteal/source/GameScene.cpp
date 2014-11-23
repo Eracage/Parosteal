@@ -70,7 +70,7 @@ bool GameScene::Init()
 	aff->SetParticleInitFunc([](Particle& particle, const ParticleTemplate& pTemplate)
 	{
 		float angle = rand() % 360;
-		particle.direction = pmath::Vec2(pmath::cos(angle), pmath::sin(angle));
+		particle.SetRotation((Globals::PLAYER_TIP - Globals::LAST_PARTICLE).angle());
 		particle.SetPosition(Globals::LAST_PARTICLE);
 		//Globals::LAST_PARTICLE = Globals::PLAYER_TIP;
 	});
@@ -83,20 +83,37 @@ bool GameScene::Init()
 	particleSystem->AddAffector(aff);
 	particleSystem->SetEmitProperties(true, 100.0f, 100.0f, 1, 1);
 
+	Globals::TIMER = 120;
+	Globals::JAM_PARTICIPATIONS = 0;
+
 	layers[LMap]->AddChild(new CloudController());
 
 	{
+		GameObject* bg = new GameObject();
+		bg->AddComponent(new Sprite("UI.png"));
+		bg->transform.SetPosition(-686, -366);
+		bg->transform.SetOrigin(7);
+		layers[LUi]->AddChild(bg);
+
 		GameObject* go = new GameObject();
 		go->AddComponent(new UpdatingText<float>("Attended ", Globals::JAM_PARTICIPATIONS, " Game Jams"));
-		go->transform.SetPosition(-640, -360);
+		go->transform.SetPosition(-634, -354);
 		go->transform.SetOrigin(7);
 		layers[LUi]->AddChild(go);
+
+		GameObject* go2 = new GameObject();
+		go2->AddComponent(new UpdatingText<float>("Time left: ", Globals::TIMER, "s"));
+		go2->transform.SetPosition(-634, -300);
+		go2->transform.SetOrigin(7);
+		layers[LUi]->AddChild(go2);
 	}
 
 	return true;
 }
 bool GameScene::DeInit()
 {
+	if (Globals::MAX_JAM_PARTICIPATIONS < Globals::JAM_PARTICIPATIONS)
+		Globals::MAX_JAM_PARTICIPATIONS = Globals::JAM_PARTICIPATIONS;
 	return true;
 }
 
@@ -110,9 +127,9 @@ void GameScene::Update(float dt)
 	}
 	//create particles
 	pmath::Vec2 difference = Globals::PLAYER_TIP - Globals::LAST_PARTICLE;
-	while(difference.length() > 32)
+	while(difference.length() > 24)
 	{
-		pmath::Vec2 newPos = difference.unitVector()*32;
+		pmath::Vec2 newPos = difference.unitVector()*24;
 		Globals::LAST_PARTICLE += newPos;
 		particleSystem->Emit(1);
 		difference = Globals::PLAYER_TIP - Globals::LAST_PARTICLE;
@@ -131,6 +148,12 @@ void GameScene::Update(float dt)
 		scale *= 1 - dt;
 
 	transform.SetScale(scale);
+
+	//timer
+	Globals::TIMER -= dt;
+	if (Globals::TIMER < 0){
+		uthSceneM.GoToScene(MENU);
+	}
 
 	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }

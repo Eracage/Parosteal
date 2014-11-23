@@ -9,9 +9,15 @@ pmath::Vec2 Globals::PLAYER_POS;
 
 pmath::Vec2 Globals::PLAYER_TIP;
 
+pmath::Vec2 Globals::PLAYER_MAX = pmath::Vec2(0, 0);
+pmath::Vec2 Globals::PLAYER_MIN = pmath::Vec2(0, 0);
+
 float Globals::DIFFICULTY = 0;
 
 float Globals::JAM_PARTICIPATIONS = 0;
+float Globals::MAX_JAM_PARTICIPATIONS = 0;
 
 Player* Globals::PLAYER;
+
+float Globals::TIMER = 120;
 

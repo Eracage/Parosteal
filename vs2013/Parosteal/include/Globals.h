@@ -28,6 +28,8 @@ public:
 
 	static std::string LASTHIT;
 
+	static pmath::Vec2 TILE_MIDDLE;
+
 	static void SoftReset();
 };
 

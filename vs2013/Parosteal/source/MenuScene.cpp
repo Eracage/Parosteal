@@ -57,9 +57,14 @@ bool MenuScene::Init()
 	//AddChild(a = new GameObject());
 	//a->AddComponent(new Sprite("test.tga"));
 
+	auto logo = new GameObject;
+	logo->AddComponent(new Sprite("logo.png"));
+	logo->transform.SetPosition(0,-128);
+	AddChild(logo);
+
 	pmath::Vec2 position, size;
 	position.x = 0;
-	position.y = -256;
+	position.y = 0;
 
 	size.w = 512;
 	size.h = 64;
@@ -73,10 +78,12 @@ bool MenuScene::Init()
 
 
 	GameObject* go = new GameObject();
-	go->AddComponent(new UpdatingText<float>("Max Jams Attended: ", Globals::MAX_JAM_PARTICIPATIONS, ""));
+	Text* jamCount;
+	go->AddComponent(jamCount = new UpdatingText<float>("Max Jams Attended: ", Globals::MAX_JAM_PARTICIPATIONS, ""));
 	go->transform.SetPosition(-634, -354);
 	go->transform.SetOrigin(7);
 	AddChild(go);
+	jamCount->SetColor(pmath::Vec4(0.1,1,0.1,1));
 
 	return true;
 }

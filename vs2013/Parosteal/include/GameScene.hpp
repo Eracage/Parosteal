@@ -25,6 +25,7 @@ public:
 
 	std::vector<uth::Sound*> sounds;
 	float soundTimer;
+	bool finished;
 };
 
 #endif

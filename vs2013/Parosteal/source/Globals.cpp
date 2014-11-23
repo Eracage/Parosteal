@@ -22,6 +22,7 @@ Player* Globals::PLAYER;
 
 float Globals::TIMER = 120;
 
+pmath::Vec2 Globals::TILE_MIDDLE;
 
 void Globals::SoftReset()
 {
@@ -37,7 +38,9 @@ void Globals::SoftReset()
 
 	JAM_PARTICIPATIONS = 0;
 
+	TILE_MIDDLE = pmath::Vec2();
+
 	LASTHIT = "";
 
-	TIMER = 120;
+	TIMER = 2;
 }

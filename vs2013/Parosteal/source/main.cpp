@@ -18,9 +18,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	while (uthEngine.Running())
 	{
-		if (uthInput.Keyboard.IsKeyPressed(uth::Keyboard::Escape))
-			uthEngine.Exit();
-
 		uthEngine.Update();
 
 		uthEngine.Draw();
@@ -42,9 +39,6 @@ int main()
 
 	while(uthEngine.Running())
 	{
-		if (uthInput.Keyboard.IsKeyPressed(uth::Keyboard::Escape))
-			uthEngine.Exit();
-
 		uthEngine.Update();
 
 		uthEngine.Draw();

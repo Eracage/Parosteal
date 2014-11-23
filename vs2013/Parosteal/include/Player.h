@@ -10,7 +10,7 @@ public:
 	Player(Object* map);
 	void update(float dt) override;
 
-	void setDifficulty();
+	void defaults();
 	pmath::Vec2 PlayerPos;
 
 	void onCollision(int cloudType);
@@ -29,6 +29,7 @@ private:
 	float m_tipRandomMovementMultiplier;
 	float m_spinMultiplier;
 	float m_spinPow;
+	float m_bonusSpin;
 	float m_speed;
 	float m_speedMultiplier;
 

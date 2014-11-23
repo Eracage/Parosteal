@@ -95,7 +95,8 @@ void DefaultScene::Update(float dt)
 
 
 
-	if(totalTime >= aEnd || uthInput.Common == uth::InputEvent::CLICK)
+	if(totalTime >= aEnd || uthInput.Common == uth::InputEvent::CLICK
+		|| uthInput.Keyboard.IsKeyDown(Keyboard::Space))
     {
         uthSceneM.GoToScene(0);
 	}

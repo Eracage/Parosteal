@@ -12,11 +12,13 @@ CloudController::CloudController()
 	{
 		auto *o = new GameObject();
 		AddChild(o);
+
 		float angle = rand() % 360;
-		float x = 2000 * pmath::cos(angle);
-		float y = 2000 * pmath::sin(angle);
-		o->transform.SetPosition(Globals::PLAYER_POS.x + x, Globals::PLAYER_POS.y + y);
+		pmath::Vec2 pos = pmath::Vec2(pmath::cos(angle), pmath::sin(angle))
+			* Randomizer::GetFloat(0.3, 1) * 1500;
+		o->transform.SetPosition(Globals::PLAYER_POS.x + pos.x, Globals::PLAYER_POS.y + pos.y);
 		o->transform.SetRotation(rand() % 360);
+
 		o->AddComponent(new Cloud());
 		
 	}
@@ -32,12 +34,12 @@ void CloudController::update(float)
 
 		double distance = posVector.distance(posVector, Globals::PLAYER_POS);
 
-		if (distance > 2048)
+		if (distance > 1600)
 		{
 			float angle = rand() % 360;
-			float x = 2000 * pmath::cos(angle);
-			float y = 2000 * pmath::sin(angle);
-			o->transform.SetPosition(Globals::PLAYER_POS.x + x, Globals::PLAYER_POS.y + y);
+			pmath::Vec2 pos = pmath::Vec2(pmath::cos(angle), pmath::sin(angle))
+				* Randomizer::GetFloat(0.8, 1) * 1500;
+			o->transform.SetPosition(Globals::PLAYER_POS.x + pos.x, Globals::PLAYER_POS.y + pos.y);
 			o->transform.SetRotation(rand() % 360);
 			o->GetComponent<Cloud>()->respawn();
 		}

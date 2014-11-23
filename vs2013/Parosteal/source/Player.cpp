@@ -134,7 +134,7 @@ void Player::update(float dt)
 
 	tipT.SetPosition(pmath::Mat2::createRotation(SpinAmount) * tipT.GetPosition());
 
-	m_top->transform.Rotate(SpinAmount)
+	m_top->transform.Rotate(SpinAmount);
 
 	// Keep tip in rational range
 	if (tipT.GetPosition().lengthSquared() > 12000)

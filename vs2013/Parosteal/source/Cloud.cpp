@@ -1,5 +1,6 @@
 #include <Cloud.h>
 #include <Globals.h>
+#include <JamGame.h>
 
 using namespace uth;
 
@@ -52,7 +53,7 @@ void Cloud::Update(float dt)
 		objects[i]->transform.Rotate(rotationSpeeds[i] * dt * (i % 2 ? -1 : 1));
 	}
 
-	if ((parent->transform.GetPosition() - Globals::PLAYER_POS).lengthSquared() < 90000)
+	if ((parent->transform.GetPosition() - Globals::PLAYER_POS).length() < 190)
 	{
 		switch (type)
 		{
@@ -61,7 +62,18 @@ void Cloud::Update(float dt)
 		case Cloud::Plum:
 			break;
 		case Cloud::Game:
+		{
+			JamGame* g;
+			parent->Parent()->Parent()->AddChild(g = new JamGame(parent->transform.GetPosition()));
+			Globals::JAM_PARTICIPATIONS++;
+			float angle = rand() % 360;
+			pmath::Vec2 pos = pmath::Vec2(pmath::cos(angle), pmath::sin(angle))
+				* Randomizer::GetFloat(0.8, 1) * 1500;
+			parent->transform.SetPosition(Globals::PLAYER_POS.x + pos.x, Globals::PLAYER_POS.y + pos.y);
+			parent->transform.SetRotation(rand() % 360);
+			respawn();
 			break;
+		}
 		case Cloud::Blueberry:
 			break;
 		case Cloud::Spinach:

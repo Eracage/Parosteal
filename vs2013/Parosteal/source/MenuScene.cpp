@@ -1,6 +1,8 @@
 #include <MenuScene.hpp>
 #include <Scenes.hpp>
 #include <Button.h>
+#include <UpdatingText.h>
+#include <Globals.h>
 
 using namespace uth;
 
@@ -68,6 +70,13 @@ bool MenuScene::Init()
 	AddChild(a = new Button(position, size, "Credits", [](){uthSceneM.GoToScene(CREDITS); }));
 	position.y += 80;
 	AddChild(a = new Button(position, size, "Quit", [](){ uthEngine.Exit(); MenuScene::audio->Stop(); }));
+
+
+	GameObject* go = new GameObject();
+	go->AddComponent(new UpdatingText<float>("Max Jams Attended: ", Globals::MAX_JAM_PARTICIPATIONS, ""));
+	go->transform.SetPosition(-634, -354);
+	go->transform.SetOrigin(7);
+	AddChild(go);
 
 	return true;
 }

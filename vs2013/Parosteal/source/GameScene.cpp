@@ -52,6 +52,8 @@ bool GameScene::Init()
 	sounds.push_back(uthRS.LoadSound("Beat5.wav"));
 	sounds[rand() % sounds.size()]->Play();
 
+	Globals::SoftReset();
+
 	createLayers();
 
 	layers[LMap]->AddChild(new Background());
@@ -82,9 +84,6 @@ bool GameScene::Init()
 
 	particleSystem->AddAffector(aff);
 	particleSystem->SetEmitProperties(true, 100.0f, 100.0f, 1, 1);
-
-	Globals::TIMER = 120;
-	Globals::JAM_PARTICIPATIONS = 0;
 
 	layers[LMap]->AddChild(new CloudController());
 

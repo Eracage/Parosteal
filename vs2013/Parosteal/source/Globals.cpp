@@ -1,6 +1,5 @@
 #include <Globals.h>
 
-float Globals::SCORE = 0;
 int Globals::CLOUD_COUNT = 36;
 pmath::Vec2 Globals::LAST_PARTICLE = pmath::Vec2(0, 0);
 
@@ -17,7 +16,28 @@ float Globals::DIFFICULTY = 0;
 float Globals::JAM_PARTICIPATIONS = 0;
 float Globals::MAX_JAM_PARTICIPATIONS = 0;
 
+std::string Globals::LASTHIT = "";
+
 Player* Globals::PLAYER;
 
 float Globals::TIMER = 120;
 
+
+void Globals::SoftReset()
+{
+	CLOUD_COUNT = 36;
+
+	LAST_PARTICLE = pmath::Vec2(0, 0);
+
+	//Player control
+	PLAYER_MAX = pmath::Vec2(0, 0);
+	PLAYER_MIN = pmath::Vec2(0, 0);
+
+	DIFFICULTY = 0;
+
+	JAM_PARTICIPATIONS = 0;
+
+	LASTHIT = "";
+
+	TIMER = 120;
+}

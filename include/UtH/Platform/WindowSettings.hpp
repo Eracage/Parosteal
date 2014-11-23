@@ -26,7 +26,7 @@ namespace uth
 			position(100, 100),
 			size(1280, 720),
 
-			title("Parosteal - The Most Awesome Game Evah")
+			title("Top Jammer - The Most Awesome Game Evah")
 		{}
 
 

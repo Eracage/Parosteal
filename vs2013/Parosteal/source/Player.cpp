@@ -52,9 +52,13 @@ Player::Player(Object* map)
 	: GameObject("Player"),
 	m_map(map)
 {
+	AddChild(m_topShadow = new GameObject());
+	m_topShadow->AddTags({ "Player", "Shadow" });
+	m_topShadow->AddComponent(new Sprite("TopBottom.png"));
+
 	AddChild(m_top = new GameObject());
 	m_top->AddTags({ "Player", "Base" });
-	m_top->AddComponent(new Sprite("PlayerBase.png"));
+	m_top->AddComponent(new Sprite("TopTop.png"));
 
 	AddChild(m_tip = new GameObject());
 	m_tip->AddTags({ "Player", "Tip" });
@@ -115,7 +119,7 @@ void Player::update(float dt)
 	// Making tip make random movement, more the further it is from base
 	tipT.Move(
 		(tipPos/15 + uth::Randomizer::InsideCircle(
-			(450 + pow(tipPos.length(), 1.8)) / 5)) 
+			(450 + pow(tipPos.length(), 1.8f)) / 5)) 
 		* m_tipRandomMovementMultiplier * dt);
 
 	// Move Player
@@ -130,13 +134,16 @@ void Player::update(float dt)
 
 	tipT.SetPosition(pmath::Mat2::createRotation(SpinAmount) * tipT.GetPosition());
 
+	m_top->transform.Rotate(SpinAmount)
+
 	// Keep tip in rational range
 	if (tipT.GetPosition().lengthSquared() > 12000)
-		tipT.SetPosition(tipT.GetPosition() * (1-dt));
+		tipT.SetPosition(tipT.GetPosition().normalized() * 109);
 
 	// Keep top in opposite direction of tip
 	m_baseTargetPos = -tipT.GetPosition();
 	m_top->transform.Move((m_baseTargetPos - m_top->transform.GetPosition()) * dt * 3);
+	m_topShadow->transform.SetPosition(m_top->transform.GetPosition() * 0.90);
 
 
 	//float rotation = dt * (tipPos.length() + 100);

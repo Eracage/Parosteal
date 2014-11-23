@@ -11,6 +11,7 @@ public:
 	pmath::Vec2 PlayerPos;
 private:
 	GameObject* m_top;
+	GameObject* m_topShadow;
 	GameObject* m_tip;
 
 	Object* m_map;

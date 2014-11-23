@@ -8,6 +8,7 @@ Background::Background()
 	textures.push_back(uthRS.LoadTexture("Background1.png"));
 	textures.push_back(uthRS.LoadTexture("Background2.png"));
 	textures.push_back(uthRS.LoadTexture("Background3.png"));
+	textures.push_back(uthRS.LoadTexture("Background4.png"));
 
 	size = uthEngine.GetWindow().GetCamera().GetSize().x;
 

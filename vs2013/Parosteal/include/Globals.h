@@ -20,6 +20,12 @@ public:
 	static float DIFFICULTY;
 
 	static float JAM_PARTICIPATIONS;
+
+	static pmath::Vec2 PLAYER_MAX;
+	static pmath::Vec2 PLAYER_MIN;
+
+	static float TIMER;
+
 };
 
 #endif

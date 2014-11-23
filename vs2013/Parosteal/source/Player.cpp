@@ -153,6 +153,17 @@ void Player::update(float dt)
 	Globals::PLAYER_TIP = pmath::Vec2i(PlayerPos + tipT.GetPosition());
 
 	m_map->transform.SetOrigin(Globals::PLAYER_POS);
+
+	//check if outside max/min coordinated
+	if (Globals::PLAYER_POS.x > Globals::PLAYER_MAX.x)
+		Globals::PLAYER_MAX.x = Globals::PLAYER_POS.x;
+	else if (Globals::PLAYER_POS.x < Globals::PLAYER_MIN.x)
+		Globals::PLAYER_MIN.x = Globals::PLAYER_POS.x;
+
+	if (Globals::PLAYER_POS.y > Globals::PLAYER_MAX.y)
+		Globals::PLAYER_MAX.y = Globals::PLAYER_POS.y;
+	else if (Globals::PLAYER_POS.y < Globals::PLAYER_MIN.y)
+		Globals::PLAYER_MIN.y = Globals::PLAYER_POS.y;
 }
 
 void Player::setDifficulty()

@@ -12,3 +12,6 @@ pmath::Vec2 Globals::PLAYER_TIP;
 float Globals::DIFFICULTY = 0;
 
 float Globals::JAM_PARTICIPATIONS = 0;
+
+Player* Globals::PLAYER;
+

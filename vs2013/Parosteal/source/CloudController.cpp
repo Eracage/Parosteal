@@ -36,11 +36,7 @@ void CloudController::update(float)
 
 		if (distance > 1600)
 		{
-			float angle = rand() % 360;
-			pmath::Vec2 pos = pmath::Vec2(pmath::cos(angle), pmath::sin(angle))
-				* Randomizer::GetFloat(0.8, 1) * 1500;
-			o->transform.SetPosition(Globals::PLAYER_POS.x + pos.x, Globals::PLAYER_POS.y + pos.y);
-			o->transform.SetRotation(rand() % 360);
+			o->GetComponent<Cloud>()->randomMove();
 			o->GetComponent<Cloud>()->respawn();
 		}
 	}

@@ -47,7 +47,7 @@ bool GameScene::Init()
 
 	layers[LMap]->AddChild(new Background());
 
-	layers[LPlayer]->AddChild(new Player(layers[LMap]));
+	layers[LPlayer]->AddChild(Globals::PLAYER = new Player(layers[LMap]));
 
 	ParticleTemplate pt;
 	pt.SetLifetime(-1.f);
@@ -73,7 +73,6 @@ bool GameScene::Init()
 
 	particleSystem->AddAffector(aff);
 	particleSystem->SetEmitProperties(true, 100.0f, 100.0f, 1, 1);
-	particleSystem->AddTag("PS");
 
 	layers[LMap]->AddChild(new CloudController());
 

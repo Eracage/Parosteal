@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <UtH/UtHEngine.hpp>
 
 
@@ -9,6 +12,8 @@ public:
 
 	void setDifficulty();
 	pmath::Vec2 PlayerPos;
+
+	void onCollision(int cloudType);
 private:
 	GameObject* m_top;
 	GameObject* m_topShadow;
@@ -26,5 +31,6 @@ private:
 	float m_speed;
 	float m_speedMultiplier;
 
-
 };
+
+#endif

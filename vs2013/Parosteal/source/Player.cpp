@@ -64,8 +64,6 @@ Player::Player(Object* map)
 	m_tip->AddTags({ "Player", "Tip" });
 	m_tip->AddComponent(new Sprite("PlayerTip.png"));
 
-
-
 	Globals::SCORE = 0;
 }
 
@@ -174,4 +172,26 @@ void Player::setDifficulty()
 	m_speed += difSqrt * 0.1;
 	m_speedMultiplier += 0.05 * difSqrt;
 
+}
+
+void Player::onCollision(int cloudType){
+	switch (cloudType)
+	{
+	case 0: //Strawberry
+		m_speed = 0.5;
+		break;
+	case 1: //Plum
+		m_speed = 4;
+		break;
+	case 2: //Game
+		break;
+	case 3: //Blueberry
+		m_tip->transform.SetPosition(pmath::Mat2::createRotation(rand()) * m_tip->transform.GetPosition());
+		break;
+	case 4: //Spinach
+		m_speed = 1;
+		break;
+	default:
+		break;
+	}
 }

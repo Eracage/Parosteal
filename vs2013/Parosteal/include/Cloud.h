@@ -22,6 +22,7 @@ public:
 	};
 	Cloud();
 
+	void randomMove();
 	void Init();
 	void respawn();
 	void Update(float dt) override;

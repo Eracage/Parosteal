@@ -66,11 +66,7 @@ void Cloud::Update(float dt)
 			JamGame* g;
 			parent->Parent()->Parent()->AddChild(g = new JamGame(parent->transform.GetPosition()));
 			Globals::JAM_PARTICIPATIONS++;
-			float angle = rand() % 360;
-			pmath::Vec2 pos = pmath::Vec2(pmath::cos(angle), pmath::sin(angle))
-				* Randomizer::GetFloat(0.8, 1) * 1500;
-			parent->transform.SetPosition(Globals::PLAYER_POS.x + pos.x, Globals::PLAYER_POS.y + pos.y);
-			parent->transform.SetRotation(rand() % 360);
+			randomMove();
 			respawn();
 			break;
 		}
@@ -79,7 +75,17 @@ void Cloud::Update(float dt)
 		case Cloud::Spinach:
 			break;
 		}
+		Globals::PLAYER->onCollision(type);
 	}
 
 	parent->transform.Move(dir * dt);
+}
+
+void Cloud::randomMove()
+{
+	float angle = rand() % 360;
+	pmath::Vec2 pos = pmath::Vec2(pmath::cos(angle), pmath::sin(angle))
+		* Randomizer::GetFloat(0.8, 1) * 1500;
+	parent->transform.SetPosition(Globals::PLAYER_POS.x + pos.x, Globals::PLAYER_POS.y + pos.y);
+	parent->transform.SetRotation(rand() % 360);
 }

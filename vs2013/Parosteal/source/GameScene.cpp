@@ -44,6 +44,13 @@ void GameScene::createLayers()
 bool GameScene::Init()
 {
 	uthEngine.GetWindow().GetCamera().SetSize(1280, 720);
+	soundTimer = 0;
+	sounds.push_back(uthRS.LoadSound("Beat1.wav"));
+	sounds.push_back(uthRS.LoadSound("Beat2.wav"));
+	sounds.push_back(uthRS.LoadSound("Beat3.wav"));
+	sounds.push_back(uthRS.LoadSound("Beat4.wav"));
+	sounds.push_back(uthRS.LoadSound("Beat5.wav"));
+	sounds[rand() % sounds.size()]->Play();
 
 	createLayers();
 
@@ -95,6 +102,12 @@ bool GameScene::DeInit()
 
 void GameScene::Update(float dt)
 {
+	soundTimer += dt;
+	if (soundTimer > 8)
+	{
+		soundTimer -= 8;
+		sounds[rand() % sounds.size()]->Play(soundTimer);
+	}
 	//create particles
 	pmath::Vec2 difference = Globals::PLAYER_TIP - Globals::LAST_PARTICLE;
 	while(difference.length() > 32)

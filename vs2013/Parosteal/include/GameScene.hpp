@@ -22,6 +22,9 @@ public:
 	pmath::Vec2 position;
 
 	uth::ParticleSystem* particleSystem;
+
+	std::vector<uth::Sound*> sounds;
+	float soundTimer;
 };
 
 #endif

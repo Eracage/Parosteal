@@ -59,7 +59,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)..\ext\include\;$(SolutionDir)..\ext\freetype_include\;$(SolutionDir)..\include\;$(ProjectDir)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
@@ -120,6 +120,13 @@
     <ClInclude Include="include\GameScene.hpp" />
     <ClInclude Include="include\Globals.h" />
     <ClInclude Include="include\UpdatingText.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="GLFW_ICON.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Parosteal.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

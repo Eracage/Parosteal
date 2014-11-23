@@ -100,6 +100,7 @@
     <ClCompile Include="source\Cloud.cpp" />
     <ClCompile Include="source\CloudController.cpp" />
     <ClCompile Include="source\CreditsScene.cpp" />
+    <ClCompile Include="source\JamGame.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\GameScene.cpp" />
     <ClCompile Include="source\MenuScene.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="include\Cloud.h" />
     <ClInclude Include="include\CloudController.hpp" />
     <ClInclude Include="include\CreditsScene.hpp" />
+    <ClInclude Include="include\JamGame.h" />
     <ClInclude Include="include\MenuScene.hpp" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Scenes.hpp" />

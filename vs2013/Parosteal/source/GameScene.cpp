@@ -54,15 +54,16 @@ bool GameScene::Init()
 	pt.SetSpeed(0);
 	pt.SetTexture(uthRS.LoadTexture("particle.png"));
 
-	auto ps = layers[LMap]->AddChild(new ParticleSystem(3000));
-	ps->SetTemplate(pt);
+	layers[LMap]->AddChild(particleSystem = new ParticleSystem(300000));
+	particleSystem->SetTemplate(pt);
 
 	Affector* aff = new Affector();
 	aff->SetParticleInitFunc([](Particle& particle, const ParticleTemplate& pTemplate)
 	{
 		float angle = rand() % 360;
 		particle.direction = pmath::Vec2(pmath::cos(angle), pmath::sin(angle));
-		particle.SetGlobalPosition(Globals::PLAYER_TIP);
+		particle.SetPosition(Globals::LAST_PARTICLE);
+		//Globals::LAST_PARTICLE = Globals::PLAYER_TIP;
 	});
 
 	aff->SetParticleUpdateFunc([](Particle& part, const ParticleTemplate& ptemp, float dt)
@@ -70,8 +71,9 @@ bool GameScene::Init()
 		//part.color = pmath::Vec4(0, 0, 0, 1);
 	});
 
-	ps->AddAffector(aff);
-	ps->SetEmitProperties(true, 0.1f, 0.1f, 1, 1);
+	particleSystem->AddAffector(aff);
+	particleSystem->SetEmitProperties(true, 100.0f, 100.0f, 1, 1);
+	particleSystem->AddTag("PS");
 
 	layers[LMap]->AddChild(new CloudController());
 
@@ -92,6 +94,16 @@ bool GameScene::DeInit()
 
 void GameScene::Update(float dt)
 {
+	//create particles
+	pmath::Vec2 difference = Globals::PLAYER_TIP - Globals::LAST_PARTICLE;
+	while(difference.length() > 32)
+	{
+		pmath::Vec2 newPos = difference.unitVector()*32;
+		Globals::LAST_PARTICLE += newPos;
+		particleSystem->Emit(1);
+		difference = Globals::PLAYER_TIP - Globals::LAST_PARTICLE;
+	}
+
 	if (dt > 0.1)
 		dt = 0.1;
 	Scene::Update(dt);

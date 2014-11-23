@@ -117,6 +117,7 @@
     <ClInclude Include="include\Scenes.hpp" />
     <ClInclude Include="include\GameScene.hpp" />
     <ClInclude Include="include\Globals.h" />
+    <ClInclude Include="include\UpdatingText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

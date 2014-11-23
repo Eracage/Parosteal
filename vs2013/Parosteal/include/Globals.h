@@ -9,4 +9,6 @@ public:
 	static pmath::Vec2 PLAYER_TIP;
 
 	static float DIFFICULTY;
+
+	static float JAM_PARTICIPATIONS;
 };

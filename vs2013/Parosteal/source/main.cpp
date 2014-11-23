@@ -11,6 +11,8 @@ int main()
 
 	uthEngine.Init();
 
+	uthEngine.GetWindow().GetCamera().SetSize(1280, 720);
+
 	while(uthEngine.Running())
 	{
 		if (uthInput.Keyboard.IsKeyPressed(uth::Keyboard::Escape))

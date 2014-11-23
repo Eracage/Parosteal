@@ -5,6 +5,7 @@
 #include <Background.h>
 #include <CloudController.hpp>
 #include <Globals.h>
+#include <UpdatingText.h>
 
 
 using namespace uth;
@@ -73,6 +74,14 @@ bool GameScene::Init()
 	ps->SetEmitProperties(true, 0.1f, 0.1f, 1, 1);
 
 	layers[LMap]->AddChild(new CloudController());
+
+	{
+		GameObject* go = new GameObject();
+		go->AddComponent(new UpdatingText<float>("Attended ", Globals::JAM_PARTICIPATIONS, " Game Jams"));
+		go->transform.SetPosition(-640, -360);
+		go->transform.SetOrigin(7);
+		layers[LUi]->AddChild(go);
+	}
 
 	return true;
 }

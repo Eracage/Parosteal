@@ -4,6 +4,7 @@
 
 using namespace uth;
 
+uth::Sound* MenuScene::audio = nullptr;
 
 namespace
 {
@@ -36,6 +37,18 @@ void MenuScene::createLayers()
 
 bool MenuScene::Init()
 {
+	if (audio == nullptr)
+		audio = uthRS.LoadSound("Music.wav");
+	audio->Loop(true);
+	if (!audio->IsPlaying())
+	{
+		volume = 0;
+		audio->SetVolume(volume);
+		audio->Play();
+	}
+	else
+		volume = 100;
+
 	createLayers();
 
 	//AddChild(a = new GameObject());
@@ -49,11 +62,11 @@ bool MenuScene::Init()
 	size.h = 64;
 
 	position.y += 80;
-	AddChild(a = new Button(position, size, "Start game", [](){uthSceneM.GoToScene(GAME); }));
+	AddChild(a = new Button(position, size, "Start game", [](){uthSceneM.GoToScene(GAME); MenuScene::audio->Stop(); }));
 	position.y += 80;
 	AddChild(a = new Button(position, size, "Credits", [](){uthSceneM.GoToScene(CREDITS); }));
 	position.y += 80;
-	AddChild(a = new Button(position, size, "Quit", [](){ uthEngine.Exit(); }));
+	AddChild(a = new Button(position, size, "Quit", [](){ uthEngine.Exit(); MenuScene::audio->Stop(); }));
 
 	return true;
 }
@@ -65,6 +78,15 @@ bool MenuScene::DeInit()
 void MenuScene::Update(float dt)
 {
 	Scene::Update(dt);
+
+	if (volume < 100)
+	{	
+		volume += 20 * dt;
+		audio->SetVolume(volume);
+
+	}
+	else
+		audio->SetVolume(100);
 
 	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }

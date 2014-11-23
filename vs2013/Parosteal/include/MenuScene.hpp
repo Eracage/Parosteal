@@ -7,6 +7,7 @@
 class MenuScene : public uth::Scene
 {
 	void createLayers();
+	float volume;
 public:
 	MenuScene(){}
 	~MenuScene() override{}
@@ -18,6 +19,8 @@ public:
 	//void Draw(RenderTarget& target, RenderAttributes attributes = RenderAttributes()) override;
 	uth::GameObject* a;
 	std::vector<uth::Layer*> layers;
+
+	static uth::Sound* audio;
 };
 
 #endif

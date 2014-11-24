@@ -51,12 +51,32 @@ bool GameScene::Init()
 	sounds.push_back(uthRS.LoadSound("Beat3.wav"));
 	sounds.push_back(uthRS.LoadSound("Beat4.wav"));
 	sounds.push_back(uthRS.LoadSound("Beat5.wav"));
+	sounds[0]->SetVolume(70);
+	sounds[1]->SetVolume(70);
+	sounds[2]->SetVolume(80);
+	sounds[3]->SetVolume(60);
+	sounds[4]->SetVolume(6);
 	sounds[rand() % sounds.size()]->Play();
 
 	Globals::SoftReset();
 
 	createLayers();
 	finished = false;
+	targetScale = 1;
+	scale = 1;
+	endTime = 0;
+
+	{
+		GameObject* go = new GameObject("BGTILES");
+		go->AddComponent(new Sprite("bg100.png"));
+		go->transform.ScaleToSize(pmath::Vec2(51200));
+		layers[Layers::LMap]->AddChild(go);
+
+		GameObject* go2 = new GameObject("BGTILES");
+		go2->AddComponent(new Sprite("bg10.png"));
+		go2->transform.ScaleToSize(pmath::Vec2(5120));
+		layers[Layers::LMap]->AddChild(go2);
+	}
 
 	layers[LMap]->AddChild(new Background());
 
@@ -112,6 +132,9 @@ bool GameScene::Init()
 }
 bool GameScene::DeInit()
 {
+	for (auto s : sounds)
+		s->Stop();
+
 	uthEngine.SetClearColor(0, 0, 0);
 	if (Globals::MAX_JAM_PARTICIPATIONS < Globals::JAM_PARTICIPATIONS)
 		Globals::MAX_JAM_PARTICIPATIONS = Globals::JAM_PARTICIPATIONS;
@@ -122,17 +145,26 @@ bool GameScene::DeInit()
 
 void GameScene::Update(float dt)
 {
+	if (uthInput.Keyboard.IsKeyPressed(Keyboard::Escape))
+	{
+		uthSceneM.GoToScene(SceneName::MENU);
+	}
+
+	soundTimer += dt;
+	if (soundTimer > 8)
+	{
+		soundTimer -= 8;
+		sounds[rand() % sounds.size()]->Play(soundTimer);
+	}
+
+	if (dt > 0.1)
+		dt = 0.1;
+
 	if (!finished)
 	{
-		if (uthInput.Keyboard.IsKeyPressed(Keyboard::Escape))
-			uthSceneM.GoToScene(SceneName::MENU);
 
-		soundTimer += dt;
-		if (soundTimer > 8)
-		{
-			soundTimer -= 8;
-			sounds[rand() % sounds.size()]->Play(soundTimer);
-		}
+		Scene::Update(dt);
+
 
 		//create particles
 		pmath::Vec2 difference = Globals::PLAYER_TIP - Globals::LAST_PARTICLE;
@@ -144,11 +176,7 @@ void GameScene::Update(float dt)
 			difference = Globals::PLAYER_TIP - Globals::LAST_PARTICLE;
 		}
 
-		if (dt > 0.1)
-			dt = 0.1;
-		Scene::Update(dt);
 
-		static float scale = 1;
 
 
 		if (uthInput.Keyboard.IsKeyDown(Keyboard::NumpadAdd))
@@ -162,18 +190,44 @@ void GameScene::Update(float dt)
 		Globals::TIMER -= dt;
 		if (Globals::TIMER < 0)
 		{
-			GameObject* go = new GameObject();
-			go->AddComponent(new Sprite("bg100"));
-			go->transform.ScaleToSize(pmath::Vec2(51200));
-			go->transform.SetPosition(Globals::TILE_MIDDLE);
+			Globals::TIMER = 0;
 
-			GameObject* go2 = new GameObject();
-			go2->AddComponent(new Sprite("bg10"));
-			go2->transform.ScaleToSize(pmath::Vec2(5120));
-			go2->transform.SetPosition(Globals::TILE_MIDDLE);
+			for (auto o : FindAll("BGTILES"))
+			{
+				o->transform.SetPosition(Globals::TILE_MIDDLE);
+			}
+
+			pmath::Vec2 tScale;
+			tScale = (Globals::PLAYER_MAX - Globals::PLAYER_MIN) * 1.5f;
+
+			tScale.scale(1 / 1280.f, 1 / 720.f);
+			targetScale = 1/(tScale.x > tScale.y ? tScale.x : tScale.y);
+
 
 			finished = true;
 		}
+	}
+	else
+	{
+		if (scale > targetScale || (((Globals::PLAYER_MAX + Globals::PLAYER_MIN) / 2)
+			- layers[LMap]->transform.GetOrigin()).length() > 2)
+		{
+			if (scale > targetScale)
+				scale *= 1 - dt;
+
+			layers[LMap]->transform.SetScale(scale);
+			layers[LPlayer]->transform.SetScale(scale);
+
+			layers[LMap]->transform.SetOrigin(
+				layers[LMap]->transform.GetOrigin()
+				+ (((Globals::PLAYER_MAX + Globals::PLAYER_MIN) / 2)
+				- layers[LMap]->transform.GetOrigin()) * dt
+				);
+		}
+		else if (endTime > 4)
+			uthSceneM.GoToScene(SceneName::MENU);
+		else
+			endTime += dt;
 	}
 
 	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));

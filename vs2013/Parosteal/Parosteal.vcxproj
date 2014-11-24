@@ -60,7 +60,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)..\ext\include\;$(SolutionDir)..\ext\freetype_include\;$(SolutionDir)..\include\;$(ProjectDir)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>

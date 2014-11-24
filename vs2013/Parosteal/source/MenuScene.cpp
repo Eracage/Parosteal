@@ -52,6 +52,7 @@ bool MenuScene::Init()
 		audio->Play();
 	}
 
+
 	createLayers();
 
 	//AddChild(a = new GameObject());
@@ -96,14 +97,16 @@ void MenuScene::Update(float dt)
 {
 	Scene::Update(dt);
 
-	if (volume < 100)
+	if (volume < 50)
 	{	
-		volume += 20 * dt;
+		volume += 10 * dt;
 		audio->SetVolume(volume);
 
 	}
 	else
-		audio->SetVolume(100);
+	{
+		audio->SetVolume(50);
+	}
 
 	//a->transform.SetPosition(uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position()));
 }

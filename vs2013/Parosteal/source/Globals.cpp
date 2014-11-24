@@ -26,6 +26,10 @@ pmath::Vec2 Globals::TILE_MIDDLE;
 
 void Globals::SoftReset()
 {
+	PLAYER_POS = pmath::Vec2(0, 0);
+
+	PLAYER_TIP = pmath::Vec2(0, 0);
+
 	CLOUD_COUNT = 36;
 
 	LAST_PARTICLE = pmath::Vec2(0, 0);
@@ -42,5 +46,5 @@ void Globals::SoftReset()
 
 	LASTHIT = "";
 
-	TIMER = 2;
+	TIMER = 120;
 }

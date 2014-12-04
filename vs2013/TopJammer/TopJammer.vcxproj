@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8DE8265E-23CF-47AA-9EA3-233C079CD3EC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Parosteal</RootNamespace>
+    <RootNamespace>TopJammer</RootNamespace>
     <ProjectName>TopJammer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -124,10 +124,10 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="GLFW_ICON.ico" />
+    <ResourceCompile Include="TopJammer.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Parosteal.rc" />
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
